@@ -111,7 +111,14 @@ p {
 .navbar__menu__item:hover {
   background-color: var(--color-dark-green);
 }
-
+.navbar__toggle-btn {
+  position: absolute;
+  right: 32px;
+  top: 24px;
+  font-size: 24px;
+  color: var(--color-black);
+  display: none;
+}
 /*Home*/
 #home {
   background: url("image/background.png") center/cover no-repeat;
@@ -206,7 +213,7 @@ p {
   background-color: var(--color-orange);
 }
 .skill {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .skillset__left {
   flex-basis: 60%;
@@ -333,4 +340,33 @@ p {
   transform: scale(1.1);
   color: var(--color-dark-green);
   transition: all ease-in var(--animation-duration);
+}
+/*below 768px screen width*/
+@media screen and (max-width: 768px) {
+  .navbar__toggle-btn {
+    display: block;
+  }
+  #navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar__menu {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    display: none;
+  }
+
+  .about__majors {
+    flex-direction: column;
+  }
+  .major {
+    margin-bottom: 38px;
+  }
+  .skillset {
+    flex-direction: column;
+  }
+  .project {
+    flex-grow: 1;
+  }
 }
