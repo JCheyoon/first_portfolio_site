@@ -1,4 +1,6 @@
 "use strict";
+history.scrollRestoration = "manual";
+
 const navbar = document.querySelector("#navbar");
 const navbarHeight = navbar.getBoundingClientRect().height;
 document.addEventListener("scroll", () => {
@@ -107,7 +109,7 @@ const observerOptions = {
   rootMargin: "0px",
   threshold: 0.3,
 };
-const observerCallback = (entries, observer) => {
+const observerCallback = (entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting && entry.intersectionRatio > 0) {
       const index = sectionIds.indexOf(`#${entry.target.id}`);
@@ -123,7 +125,7 @@ const observerCallback = (entries, observer) => {
 const observer = new IntersectionObserver(observerCallback, observerOptions);
 sections.forEach((section) => observer.observe(section));
 
-window.addEventListener("wheel", () => {
+window.addEventListener("scroll", () => {
   if (window.scrollY === 0) {
     selectedNavIndex = 0;
   } else if (
