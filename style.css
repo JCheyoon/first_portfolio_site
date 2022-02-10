@@ -84,14 +84,22 @@ p {
 
 /*Navbar*/
 #navbar {
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-green);
+  background-color: transparent;
   align-items: center;
   color: var(--color-black);
   padding: 16px;
+  transition: all ease-in-out var(--animation-duration);
+  z-index: 1;
 }
 
+#navbar.navbar__dark {
+  background-color: var(--color-green);
+  padding: 8px;
+}
 .navbar__menu {
   display: flex;
 }
@@ -104,11 +112,13 @@ p {
   margin: 0 4px;
   cursor: pointer;
   border-radius: var(--size-border-radius);
+  border: 1px solid transparent;
 }
-.navbar__menu__item:active {
-  border: 1px solid var(--color-black);
+.navbar__menu__item.active{
+  border: 1px solid var(--color-black)
 }
 .navbar__menu__item:hover {
+  border-color: var(--color-black);
   background-color: var(--color-dark-green);
 }
 .navbar__toggle-btn {
@@ -119,10 +129,12 @@ p {
   color: var(--color-black);
   display: none;
 }
+
 /*Home*/
 #home {
   background: url("image/background.png") center/cover no-repeat;
   padding: 40px;
+  padding-top: 120px;
   text-align: center;
 }
 .home__avatar {
@@ -143,7 +155,9 @@ p {
   border: 2px solid var(--color-black);
   border-radius: var(--size-border-radius);
 }
-
+.home__contact:hover{
+  background-color: var(--color-light-green);
+}
 /*section common*/
 .section {
   text-align: center;
@@ -240,15 +254,17 @@ p {
   border-radius: var(--size-border-radius);
   font-size: var(--font-regular);
   padding: 8px 48px;
+  position: relative;
 }
-.categories__btn.active,
+.categories__btn.selected,
 .categories__btn:hover {
   background-color: var(--color-green);
+  top: 0;
 }
-.categories__btn.active .category__count,
+.categories__btn.selected .category__count,
 .categories__btn:hover .category__count {
   opacity: 1;
-  top: 0;
+  top: 6px;
 }
 .category__count {
   background-color: var(--color-orange);
@@ -258,9 +274,9 @@ p {
   height: 24px;
   line-height: 24px;
   display: inline-block;
-  position: relative;
+  position: absolute;
   top: -20px;
-  left: 4px;
+  right: 16px;
   opacity: 0;
   transition: all ease-in var(--animation-duration);
 }
@@ -268,6 +284,12 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  opacity: 1;
+  transition: all ease-out var(--animation-duration);
+}
+.work__projects.ani-out {
+  opacity: 0;
+  transform: scale(0.96); translateY(40px)
 }
 .project {
   display: flex;
@@ -278,6 +300,9 @@ p {
   height: 200px;
   margin: 2px;
   background-color: var(--color-light-white);
+}
+.project.invisible {
+  display: none;
 }
 .project__img {
   max-width: 100%;
@@ -302,7 +327,10 @@ p {
   transform: translateY(0px);
 }
 
-.project__description h3,
+.project__description h3{
+  color: var(--color-orange);
+
+}
 .project__description span {
   color: var(--color-white);
 }
@@ -312,9 +340,9 @@ p {
   display: block;
   position: relative;
   left: 50%;
-  width: 25px;
+  width: 50px;
   height: 2px;
-  margin-left: -12px;
+  transform: translateX(-50%);
   margin-top: 8px;
   background-color: var(--color-dark-white);
 }
@@ -341,32 +369,78 @@ p {
   color: var(--color-dark-green);
   transition: all ease-in var(--animation-duration);
 }
+/*Arrow-up btn*/
+.arrow-up {
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  bottom: 50px;
+  right: 50px;
+  font-size: 50px;
+  color: var(--color-black);
+  background-color: var(--color-light-green);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease-in var(--animation-duration);
+}
+.arrow-up.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
 /*below 768px screen width*/
 @media screen and (max-width: 768px) {
   .navbar__toggle-btn {
     display: block;
+    top: 16px;
+    right: 16px;
+    font-size: var(--font-medium);
   }
   #navbar {
     flex-direction: column;
     align-items: flex-start;
+    background-color: var(--color-green);
+
+  }
+  #navbar.navbar__dark{
+    padding: 16px;
   }
   .navbar__menu {
     flex-direction: column;
     text-align: center;
     width: 100%;
     display: none;
+    z-index: 1;
   }
-
+  .navbar__menu.open{
+    display: block;
+  }
+  .section{
+    padding: 16px;
+  }
   .about__majors {
     flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 0;
   }
   .major {
-    margin-bottom: 38px;
+    margin-bottom: 30px;
   }
   .skillset {
     flex-direction: column;
   }
+  .categories__btn{
+    margin: 4px 0;
+  }
   .project {
     flex-grow: 1;
+  }
+  .arrow-up{
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    line-height: 50px;
+    right: 16px;
+    bottom: 16px;
   }
 }
