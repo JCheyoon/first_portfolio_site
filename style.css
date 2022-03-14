@@ -164,6 +164,7 @@ p {
   padding: 50px;
   margin: auto;
 }
+
 .section__container {
   max-width: 1000px;
   margin: auto;
@@ -443,4 +444,15 @@ p {
     right: 16px;
     bottom: 16px;
   }
+
+}
+
+@media screen and (max-width: 500px) {
+  #contact{
+    height: 550px;
+  }
+  .contact__title{
+    padding-top: 60px;
+  }
+
 }
