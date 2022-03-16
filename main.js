@@ -136,3 +136,33 @@ window.addEventListener("scroll", () => {
   }
   selectNavItem(navItems[selectedNavIndex]);
 });
+
+//do animation progress bar when reach skills section
+const skillSection = document.querySelector("#skills");
+const skillSectionHeight = skillSection.getBoundingClientRect().height;
+
+let hasBeenScrolled = false;
+
+document.addEventListener("scroll", () => {
+  const skillBars = document.querySelectorAll(".skill__value");
+  const skillValues = document.querySelectorAll(
+    ".skill__description span:nth-child(2)"
+  );
+  const skills = [99, 95, 80];
+  if (window.scrollY / skillSectionHeight > 1.7 && !hasBeenScrolled) {
+    skillBars.forEach((skill, i) => {
+      skill.style.width = skills[i] + "%";
+      skill.classList.add("skill__animate");
+    });
+    skillValues.forEach((skill, i) => {
+      let value = 0;
+      setInterval(() => {
+        if (value <= skills[i]) {
+          skill.textContent = `${value}%`;
+          value++;
+        }
+      }, 20);
+    });
+    hasBeenScrolled = true;
+  }
+});
